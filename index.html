@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tovarlar Skladi</title>
+    <style>
+        /* Asosiy stil */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 10px;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            transition: background-color 0.5s, color 0.5s;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        body.dark-mode {
+            color: white;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        body.dark-mode h1 {
+            color: white;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        body.dark-mode .container {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+        body.dark-mode .form-group label {
+            color: white;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: border-color 0.3s, background-color 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .form-group input:focus {
+            border-color: #28a745;
+            background-color: #fff;
+            outline: none;
+        }
+        body.dark-mode .form-group input {
+            background-color: #444;
+            color: white;
+            border-color: #555;
+        }
+        body.dark-mode .form-group input:focus {
+            border-color: #28a745;
+            background-color: #555;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .form-group button:active {
+            transform: translateY(0);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 10px;
+            overflow-x: auto;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        body.dark-mode table {
+            background: #444;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+        body.dark-mode th {
+            background-color: #218838;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+            transition: background-color 0.3s;
+        }
+        body.dark-mode tr:hover {
+            background-color: #555;
+        }
+        .actions button {
+            margin-right: 5px;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .actions button.edit {
+            background-color: #ffc107;
+            color: #333;
+        }
+        .actions button.edit:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+        }
+        .actions button.delete {
+            background-color: #dc3545;
+            color: white;
+        }
+        .actions button.delete:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+        .search-box {
+            margin-bottom: 15px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: border-color 0.3s, background-color 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .search-box input:focus {
+            border-color: #28a745;
+            background-color: #fff;
+            outline: none;
+        }
+        body.dark-mode .search-box input {
+            background-color: #444;
+            color: white;
+            border-color: #555;
+        }
+        body.dark-mode .search-box input:focus {
+            border-color: #28a745;
+            background-color: #555;
+        }
+        .theme-switcher {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .theme-switcher:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .theme-switcher:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Rejimni o'zgartirish tugmasi -->
+    <div class="theme-switcher" onclick="toggleDarkMode()">🌙</div>
+
+    <h1>Tovarlar Skladi</h1>
+
+    <!-- Qidiruv bo'limi -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Tovar nomi bo'yicha qidirish..." oninput="searchProducts()">
+    </div>
+
+    <!-- Tovar qo'shish formasi -->
+    <div class="form">
+        <div class="form-group">
+            <label for="productName">Tovar Nomi:</label>
+            <input type="text" id="productName" placeholder="Tovar nomini kiriting">
+        </div>
+        <div class="form-group">
+            <label for="productQuantity">Paddon:</label>
+            <input type="number" id="productQuantity" placeholder="Paddonni kiriting">
+        </div>
+        <div class="form-group">
+            <label for="productPrice">Sektor:</label>
+            <input type="text" id="productPrice" placeholder="Sektorni kiriting">
+        </div>
+        <div class="form-group">
+            <button onclick="addProduct()">Tovar Qo'shish</button>
+        </div>
+    </div>
+
+    <!-- Tovarlar jadvali -->
+    <table id="productTable">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Tovar Nomi</th>
+                <th>Paddon</th>
+                <th>Sektor</th>
+                <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Tovarlar bu yerga dinamik ravishda qo'shiladi -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    let products = []; // Tovarlar ro'yxati
+    let editIndex = null; // Tahrirlash indeksi
+
+    // Tovar qo'shish funksiyasi
+    function addProduct() {
+        const name = document.getElementById('productName').value;
+        const quantity = document.getElementById('productQuantity').value;
+        const price = document.getElementById('productPrice').value;
+
+        if (name && quantity && price) {
+            // Tovar nomi allaqachon mavjudligini tekshirish
+            const isDuplicate = products.some(product => product.name.toLowerCase() === name.toLowerCase());
+
+            if (isDuplicate) {
+                alert("Ushbu tovar nomi allaqachon mavjud! Iltimos, boshqa nom kiriting.");
+            } else {
+                if (editIndex !== null) {
+                    // Tovar tahrirlash
+                    products[editIndex] = { name, quantity, price };
+                    editIndex = null;
+                } else {
+                    // Yangi tovar qo'shish
+                    products.push({ name, quantity, price });
+                }
+                updateTable();
+                clearForm();
+            }
+        } else {
+            alert("Iltimos, barcha maydonlarni to'ldiring!");
+        }
+    }
+
+    // Tovarlar jadvalini yangilash
+    function updateTable(filteredProducts = products) {
+        const tbody = document.querySelector("#productTable tbody");
+        tbody.innerHTML = ""; // Jadvalni tozalash
+
+        filteredProducts.forEach((product, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${product.name}</td>
+                <td>${product.quantity}</td>
+                <td>${product.price}</td>
+                <td class="actions">
+                    <button class="edit" onclick="editProduct(${index})">Tahrirlash</button>
+                    <button class="delete" onclick="deleteProduct(${index})">O'chirish</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // Tovar tahrirlash
+    function editProduct(index) {
+        const product = products[index];
+        document.getElementById('productName').value = product.name;
+        document.getElementById('productQuantity').value = product.quantity;
+        document.getElementById('productPrice').value = product.price;
+        editIndex = index;
+    }
+
+    // Tovar o'chirish
+    function deleteProduct(index) {
+        if (confirm("Ushbu tovarni o'chirishni istaysizmi?")) {
+            products.splice(index, 1);
+            updateTable();
+        }
+    }
+
+    // Formani tozalash
+    function clearForm() {
+        document.getElementById('productName').value = "";
+        document.getElementById('productQuantity').value = "";
+        document.getElementById('productPrice').value = "";
+    }
+
+    // Tovarlarni qidirish funksiyasi
+    function searchProducts() {
+        const searchText = document.getElementById('searchInput').value.toLowerCase();
+        const filteredProducts = products.filter(product => 
+            product.name.toLowerCase().includes(searchText)
+        );
+        updateTable(filteredProducts);
+    }
+
+    // Tungi/kunduzgi rejimni o'zgartirish
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDarkMode);
+        updateThemeSwitcherIcon(isDarkMode);
+    }
+
+    // Rejim tugmasining belgisini yangilash
+    function updateThemeSwitcherIcon(isDarkMode) {
+        const themeSwitcher = document.querySelector('.theme-switcher');
+        themeSwitcher.textContent = isDarkMode ? '☀️' : '🌙';
+    }
+
+    // Sahifa yuklanganda rejimni tekshirish
+    function checkDarkMode() {
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+        }
+        updateThemeSwitcherIcon(isDarkMode);
+    }
+
+    // Sahifa yuklanganda darkMode ni tekshirish
+    checkDarkMode();
+
+    // Dastlabki tovarlarni qo'shish (misol uchun)
+    products.push({ name: "Kompyuter", quantity: 10, price: "A" });
+    products.push({ name: "Telefon", quantity: 20, price: "B" });
+    products.push({ name: "Planshet", quantity: 5, price: "C" });
+    updateTable();
+</script>
+
+</body>
+</html>
