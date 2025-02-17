@@ -227,14 +227,14 @@
 
     <!-- Qidiruv bo'limi -->
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Tovar nomi bo'yicha qidirish..." oninput="searchProducts()">
+        <input type="text" id="searchInput" placeholder="Ipni Lot raqami bo'yicha qidirish..." oninput="searchProducts()">
     </div>
 
     <!-- Tovar qo'shish formasi -->
     <div class="form">
         <div class="form-group">
-            <label for="productName">Tovar Nomi:</label>
-            <input type="text" id="productName" placeholder="Tovar nomini kiriting">
+            <label for="productName">Ip Loti:</label>
+            <input type="text" id="productName" placeholder="Kerakli Ip Lotini kiriting">
         </div>
         <div class="form-group">
             <label for="productQuantity">Paddon:</label>
@@ -245,7 +245,7 @@
             <input type="text" id="productPrice" placeholder="Sektorni kiriting">
         </div>
         <div class="form-group">
-            <button onclick="addProduct()">Tovar Qo'shish</button>
+            <button onclick="addProduct()">Ipni qo'shish</button>
         </div>
     </div>
 
@@ -254,7 +254,7 @@
         <thead>
             <tr>
                 <th>№</th>
-                <th>Tovar Nomi</th>
+                <th>Lot raqami</th>
                 <th>Paddon</th>
                 <th>Sektor</th>
                 <th>Amallar</th>
@@ -281,7 +281,7 @@
             const isDuplicate = products.some(product => product.name.toLowerCase() === name.toLowerCase());
 
             if (isDuplicate) {
-                alert("Ushbu tovar nomi allaqachon mavjud! Iltimos, boshqa nom kiriting.");
+                alert("Ushbu Lot raqami allaqachon mavjud! Iltimos, boshqa nom kiriting.");
             } else {
                 if (editIndex !== null) {
                     // Tovar tahrirlash
