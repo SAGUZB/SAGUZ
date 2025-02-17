@@ -223,29 +223,29 @@
     <!-- Rejimni o'zgartirish tugmasi -->
     <div class="theme-switcher" onclick="toggleDarkMode()">🌙</div>
 
-    <h1>Tovarlar Skladi</h1>
+    <h1>Ip Sklad</h1>
 
     <!-- Qidiruv bo'limi -->
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Ipni Lot raqami bo'yicha qidirish..." oninput="searchProducts()">
+        <input type="text" id="searchInput" placeholder="Tovar nomi bo'yicha qidirish..." oninput="searchProducts()">
     </div>
 
     <!-- Tovar qo'shish formasi -->
     <div class="form">
         <div class="form-group">
-            <label for="productName">Ip Loti:</label>
-            <input type="text" id="productName" placeholder="Kerakli Ip Lotini kiriting">
+            <label for="productName">Lot raqami:</label>
+            <input type="text" id="productName" placeholder="Lot raqamini kiriting">
         </div>
         <div class="form-group">
             <label for="productQuantity">Paddon:</label>
-            <input type="number" id="productQuantity" placeholder="Paddonni kiriting">
+            <input type="number" id="productQuantity" placeholder="Paddon sonini kiriting">
         </div>
         <div class="form-group">
             <label for="productPrice">Sektor:</label>
             <input type="text" id="productPrice" placeholder="Sektorni kiriting">
         </div>
         <div class="form-group">
-            <button onclick="addProduct()">Ipni qo'shish</button>
+            <button onclick="addProduct()">Saqlash</button>
         </div>
     </div>
 
@@ -281,7 +281,7 @@
             const isDuplicate = products.some(product => product.name.toLowerCase() === name.toLowerCase());
 
             if (isDuplicate) {
-                alert("Ushbu Lot raqami allaqachon mavjud! Iltimos, boshqa nom kiriting.");
+                alert("Ushbu tovar nomi allaqachon mavjud! Iltimos, boshqa nom kiriting.");
             } else {
                 if (editIndex !== null) {
                     // Tovar tahrirlash
